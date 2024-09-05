@@ -1,0 +1,102 @@
+<%- include("partials/header.ejs") %>
+<section class="content">
+  <h2 class="georgia-pro" style="margin: 40px 0px 20px 0px; font-size: 27px">
+    Edit
+  </h2>
+  <form action="/update/<%= book.id %>" method="post">
+    <div
+      class="book-card"
+      style="
+        background-color: transparent;
+        margin-top: 80px;
+        padding: 20px 20px 20px 0px;
+      "
+    >
+      <div class="book-info georgia-pro">
+        <div class="book-cover">
+          <img
+            class="cover-image"
+            src="<%= book.cover_data %>"
+            alt="book cover"
+          />
+        </div>
+        <div class="grid">
+          <label for="isbn">ISBN:</label>
+          <input
+            type="number"
+            id="isbn"
+            name="isbn"
+            value="<%= book.isbn %>"
+            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            maxlength="13"
+            required
+          />
+          <label for="title">Title:</label>
+          <input id="title" name="title" value="<%= book.title %>" required />
+          <label for="author">Author:</label>
+          <input
+            id="author"
+            name="author"
+            value="<%= book.author %>"
+            required
+          />
+          <label for="read_date">Read Date:</label>
+          <input
+            type="date"
+            id="read_date"
+            name="read_date"
+            value="<%= book.read_date %>"
+            required
+          />
+          <label>Rating:</label>
+          <div class="user-rating">
+            <input type="radio" id="star5" name="rating" value="5" <%=
+            book.rating === 5 ? "checked" : "" %> required />
+            <label for="star5" title="5 stars">★</label>
+
+            <input type="radio" id="star4" name="rating" value="4" <%=
+            book.rating === 4 ? "checked" : "" %>/>
+            <label for="star4" title="4 stars">★</label>
+
+            <input type="radio" id="star3" name="rating" value="3" <%=
+            book.rating === 3 ? "checked" : "" %>/>
+            <label for="star3" title="3 stars">★</label>
+
+            <input type="radio" id="star2" name="rating" value="2" <%=
+            book.rating === 2 ? "checked" : "" %>/>
+            <label for="star2" title="2 stars">★</label>
+
+            <input type="radio" id="star1" name="rating" value="1" <%=
+            book.rating === 1 ? "checked" : "" %>/>
+            <label for="star1" title="1 star">★</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary">
+      <label for="review" class="review-and-notes georgia-pro">Review:</label>
+      <textarea id="review" name="review" class="lato" required>
+<%= book.review %></textarea
+      >
+    </div>
+
+    <div class="notes">
+      <label for="notes" class="review-and-notes georgia-pro">Notes:</label>
+      <textarea id="notes" name="notes" class="lato notes-textarea" required>
+<%= book.notes %></textarea
+      >
+    </div>
+    <div
+      class="actions"
+      style="margin-top: 30px; justify-content: space-between"
+    >
+      <input type="submit" value="Save" class="add-button" />
+      <a href="/">
+        <button type="button" class="cancel-button georgia-pro">Cancel</button>
+      </a>
+    </div>
+  </form>
+</section>
+
+<%- include("partials/footer.ejs") %>

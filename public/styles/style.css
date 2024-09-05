@@ -1,0 +1,429 @@
+@font-face {
+    font-family: 'GeorgiaPro';
+    src: url('../assets/fonts/GeorgiaPro-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lato';
+    src: url('../assets/fonts/Lato-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.georgia-pro {
+    font-family: 'GeorgiaPro', sans-serif;
+    font-weight: normal;
+}
+
+.lato {
+    font-family: "Lato";
+    font-weight: normal;
+}
+
+body {
+    display:flex;
+    justify-content: center;
+    font-family: 'Lato', sans-serif;
+    font-weight: normal;
+    background-color: #fff;
+    background-image: url('../assets/images/background.png');
+    background-size: cover;
+    margin: 0;
+    padding: 20px;
+    color: #000000;
+}
+
+.container{
+    width: 1110px;
+}
+
+header {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.navbar{
+    display:flex;
+    justify-content: end;
+}
+
+.navbar ul {
+    list-style-type: none;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+    font-size: 20px;
+    color: #000000;
+}
+
+h1 {   
+    font-size: 36px;  
+}
+
+h2 {
+    font-size: 24px;
+    letter-spacing: 1px;
+}
+
+#subheading{
+    font-size: 21px;
+}
+
+p {
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    font-size: 18px;
+}
+
+label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+select {
+    padding: 5px;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+
+.add-button, .cancel-button {
+    background-color: #ffca6b;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.add-button:hover{
+    background-color: #228b22;
+    color: white;
+}
+
+.cancel-button{
+    background-color: #e74c3c;
+}
+
+.cancel-button:hover{
+    background-color: black;
+    color: #e74c3c;
+}
+
+.book-card {
+    background-color: #f2f2f2;
+    border-radius: 30px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+    position: relative;
+}
+
+.book-cover {
+    float:left;
+    margin-right: 20px;
+}
+
+.cover-image{
+    height: 271px;
+}
+
+.book-info {
+    flex-grow: 1;
+}
+
+label, input{
+    font-weight: normal;
+}
+
+input{
+    font-family: 'GeorgiaPro', sans-serif;
+    font-size: 18px;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: 19% 40% ;
+    grid-template-rows: 1fr 1fr;
+    row-gap: 10px;
+    font-size: 20px;
+}
+
+.review-and-notes{
+    display:block;
+    padding: 10px 20px 10px 20px;
+    font-size: 20px;
+}
+
+textarea{
+    margin-left: 20px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    width: 96.4%;
+    max-width: calc(100% - 40px);
+    height: 200px;
+    font-size: 18px;
+    letter-spacing: 1.4px;
+    line-height: 1.6;
+    border: 1px solid black;
+    border-radius: 5px;
+    resize: none;
+}
+
+.notes-textarea{
+    height: 400px;
+}
+
+h3 {
+    font-size: 22px;
+    font-weight: normal;
+    margin: 0;
+}
+
+.book-info p {
+    margin: 5px 0;
+    font-size: 18px;
+}
+
+.rating {
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.summary p, .notes p{
+    white-space: pre-wrap;
+}
+
+.user-rating {
+    direction: rtl; 
+    display: inline-block;
+    font-size: 25px; 
+    text-align: left;
+    cursor: pointer;
+    width: 82%;
+}
+
+.user-rating input[type="radio"] {
+    display: none;
+}
+
+.user-rating label {
+    color: #d9d9d9; 
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+.user-rating input[type="radio"]:checked ~ label {
+    color: #ffbd59; 
+}
+
+.user-rating label:hover,
+.user-rating label:hover ~ label {
+    color: #ffbd59; 
+}
+
+.user-rating input[type="radio"]:checked ~ label:hover,
+.user-rating input[type="radio"]:checked ~ label:hover ~ label {
+    color: #ffbd59; 
+}
+
+.stars {
+    color: #ffbd59;
+    font-size: 30px;
+    width: 125px; 
+}
+
+.score {
+    margin-left: 10px;
+}
+
+.summary {
+    background-color: #ffca6b;
+    border-radius: 30px;
+    padding: 10px;
+    margin: 10px 0;
+    letter-spacing: 1.4px;
+    font-size: 18px;
+    clear: left;
+}
+
+.notes{
+    background-color: #f2f2f2;
+    border-radius: 30px;
+    padding: 10px;
+    margin: 30px 0px 10px 0px;
+    letter-spacing: 1.4px;
+    font-size: 18px;
+}
+
+.actions {
+    display: flex;
+    gap: 40px;
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.read-notes {
+    color: #228b22;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.amazon-link {
+    color: #228b22;
+    text-decoration: none;
+}
+
+.delete-button {
+    position: absolute;
+    width: 30px;
+    top: 20px;
+    right: 40px;
+}
+
+.pencil-container{
+    text-align: right;
+}
+
+.edit-button {    
+    width: 30px;
+    margin-right: 10px;
+}
+
+.no-data{
+    font-size: 18px;
+    text-align: center;
+    padding: 10px 0px;
+}
+
+footer {
+    display:flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 40px;
+    /* text-align: center; */
+    color: #000000;
+    font-size: 18px;
+}
+
+.footer-icons{
+    width: 30px;
+}
+
+@media (max-width: 767px){
+    .navbar ul li a{
+        font-size: 17px;
+    }
+    h1 {   
+        font-size: 30px;  
+    }
+    
+    h2 {
+        font-size: 21px;
+    }
+
+    h2[style]{
+        font-size: 23px !important;
+    }
+
+    .controls{
+        flex-direction: column;
+        align-items: start;
+        font-size: 16px;
+    }
+    select{
+        margin-left: 0px;
+        margin-top: 10px;
+    }
+    .add-button, .cancel-button{
+        font-size: 17px;
+    }
+    .book-card{
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 40px !important;
+    }
+    .book-cover{
+        float:none;
+        
+    }
+    .cover-image{
+        height: 180px;
+    }
+    h3{
+        font-size: 19px;
+        margin-top: 10px;
+    }
+
+    h3[style]{
+        font-size: 23px !important;
+    }
+
+    p[style = "font-size: 20px"]{
+        font-size: 17px !important;
+    }
+
+    .book-info p, .summary p, .notes p, .no-data {
+        font-size: 16px ;
+    }
+
+    .user-rating{
+        width: 87%;
+    }
+
+    .grid{
+        grid-template-columns: 35% 72% ;
+        margin-top: 20px;
+    }
+
+    .grid, .review-and-notes{
+        font-size: 18px;
+    }
+
+    input, textarea{
+        font-size: 16px;
+    }
+
+    textarea{
+        height: 100px;
+    }
+
+    .notes-textarea{
+        height: 150px;
+    }
+
+    .stars {
+        font-size: 25px;
+        width: 115px; 
+    }
+    
+    .score {
+        font-size: 16px;
+    }
+    .delete-button, .edit-button{
+        width: 25px;
+    }
+    .actions{
+        font-size: 17px;
+    }
+    footer{
+        font-size: 17px;
+    }
+    .footer-icons{
+        width: 25px;
+    }
+}

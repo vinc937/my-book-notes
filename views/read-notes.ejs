@@ -1,0 +1,108 @@
+<%- include("partials/header.ejs") %>
+
+<section class="content">
+  <div
+    class="book-card"
+    style="
+      background-color: transparent;
+      margin-top: 80px;
+      padding: 20px 20px 20px 0px;
+    "
+  >
+    <div class="book-info georgia-pro">
+      <div class="book-cover">
+        <img
+          class="cover-image"
+          src="<%= book.cover_data %>"
+          alt="book cover"
+        />
+      </div>
+      <h3><%= book.title %></h3>
+      <p style="font-size: 20px">by <%= book.author %></p>
+      <p>Read date: <%= book.formated_date %></p>
+      <div class="rating">
+        <% switch(book.rating) { case 1: %>
+        <span class="stars">★</span>
+        <% break; case 2: %>
+        <span class="stars">★★</span>
+        <% break; case 3: %>
+        <span class="stars">★★★</span>
+        <% break; case 4: %>
+        <span class="stars">★★★★</span>
+        <% break; case 5: %>
+        <span class="stars">★★★★★</span>
+        <% break; default: %>
+        <span class="stars">No Rating</span>
+        <% } %>
+        <span class="score"><%= book.rating %>/5</span>
+      </div>
+    </div>
+    <a href="/delete/<%= book.id %>" onclick="return confirmation()">
+      <img
+        class="delete-button"
+        src="/assets/icons/delete.svg"
+        alt="delete button"
+      />
+    </a>
+  </div>
+
+  <div class="summary">
+    <h3
+      class="georgia-pro"
+      style="padding: 20px 20px 0px 20px; font-size: 27px"
+    >
+      Review
+    </h3>
+    <p class="lato" style="padding: 10px 20px"><%= book.review %></p>
+  </div>
+
+  <div class="notes">
+    <h3
+      class="georgia-pro"
+      style="padding: 20px 20px 0px 20px; font-size: 27px"
+    >
+      My Notes
+    </h3>
+    <p class="lato" style="padding: 10px 20px"><%= book.notes %></p>
+    <div
+      class="actions lato"
+      style="
+        padding: 0px 20px;
+        justify-content: space-between;
+        margin-bottom: 15px;
+      "
+    >
+      <a
+        href="https://www.amazon.com/s?k=<%= book.title.replace(/ /g, '+') %>&i=stripbooks"
+        target="_blank"
+        class="amazon-link"
+        style="font-weight: bold"
+        >Find on <i>Amazon</i></a
+      >
+      <a href="/edit/<%= book.id %>">
+        <img
+          class="edit-button"
+          src="/assets/icons/pencil.svg"
+          alt="edit button"
+        />
+      </a>
+    </div>
+  </div>
+  <div class="actions" style="margin-top: 30px">
+    <a href="/">
+      <button type="button" class="add-button georgia-pro">Back</button>
+    </a>
+  </div>
+</section>
+<script>
+  function confirmation() {
+    const deleteButton = document.getElementsByClassName("delete-button");
+    var answer = confirm("Are you sure you want to delete this book?");
+    if (answer) {
+      deleteButton.submit();
+    } else {
+      return false;
+    }
+  }
+</script>
+<%- include("partials/footer.ejs") %>

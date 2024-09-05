@@ -1,0 +1,109 @@
+<%- include ("partials/header.ejs") %>
+
+<section class="content">
+  <h2 class="lato">
+    Reading is a vital part of my life—it enhances my focus, sharpens my learning, improves comprehension, and, most importantly, it's something I genuinely enjoy. On this site, you’ll find a curated list of the books I’ve read, along with my personal reviews and notes on each one.
+  </h2>
+  <div class="controls">
+    <form id="orderForm" method="get">
+      <label for="orderBy">Order by:</label>
+      <select id="orderBy" class="lato" onchange="submitForm()">
+        <option value="">Please select</option>
+        <option value="title" <%= selectedOption === 'title' ? 'selected' : '' %>>Title</option>
+        <option value="read_date" <%= selectedOption === 'read_date' ? 'selected' : '' %>>Read Date</option>
+        <option value="rating" <%= selectedOption === 'rating' ? 'selected' : '' %>>Rating</option>
+      </select>
+    </form>
+  </div>
+  <a href="/add">
+    <button class="add-button georgia-pro">Add</button>
+  </a>
+  <% if (locals.books) { %> <% books.forEach(book => { %>
+  <div class="book-card">
+    <div class="book-info georgia-pro">
+      <div class="book-cover" style="margin-bottom: 10px;">
+        <img
+          class="cover-image"
+          style="height: 180px;"
+          src="<%= book.cover_data %>"
+          alt="book cover"
+        />
+      </div>
+      <h3><%= book.title %></h3>
+      <p style="font-size: 20px">by <%= book.author %></p>
+      <p>Read date: <%= book.formated_date %></p>
+      <div class="rating">
+        <% switch(book.rating) { case 1: %>
+        <span class="stars">★</span>
+        <% break; case 2: %>
+        <span class="stars">★★</span>
+        <% break; case 3: %>
+        <span class="stars">★★★</span>
+        <% break; case 4: %>
+        <span class="stars">★★★★</span>
+        <% break; case 5: %>
+        <span class="stars">★★★★★</span>
+        <% break; default: %>
+        <span class="stars">No Rating</span>
+        <% } %>
+        <span class="score"><%= book.rating %>/5</span>
+      </div>
+      <div class="summary">
+        <p class="lato"><%= book.review %></p>
+        <div class="pencil-container">
+          <a href="/edit/<%= book.id %>">
+            <img
+              class="edit-button"
+              src="/assets/icons/pencil.svg"
+              alt="edit button"
+            />
+          </a>
+        </div>
+      </div>
+      <div class="actions lato">
+        <a href="/notes/<%= book.id %>" class="read-notes">Read Notes</a>
+        <a
+          href="https://www.amazon.com/s?k=<%= book.title.replace(/ /g, '+') %>&i=stripbooks"
+          target="_blank"
+          class="amazon-link"
+          >Find on <i>Amazon</i></a
+        >
+      </div>
+    </div>
+    <a href="/delete/<%= book.id %>" onclick="return confirmation()">
+      <img
+        class="delete-button"
+        src="/assets/icons/delete.svg"
+        alt="delete button"
+      />
+    </a>
+  </div>
+  <% }) %> <% } else { %>
+  <p class="no-data">The database is currently empty. Please add some books to it.</p>
+  <% } %>
+</section>
+<script>
+  function submitForm() {
+    const selectElement = document.getElementById("orderBy");
+    const selectedOption = selectElement.value;
+    if (!selectedOption) {
+      return;
+    }
+    const form = document.getElementById("orderForm");
+
+    form.action = `/order-by/${selectedOption}`;
+    form.submit();
+  }
+  function confirmation(){
+    const deleteButton = document.getElementsByClassName("delete-button")
+    var answer = confirm("Are you sure you want to delete this book?");
+    if (answer){
+      deleteButton.submit();
+    } else {
+      return false;
+    }
+  }
+
+</script>
+
+<%- include ("partials/footer.ejs") %>

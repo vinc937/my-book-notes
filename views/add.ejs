@@ -1,0 +1,107 @@
+<%- include("partials/header.ejs") %>
+<section class="content">
+  <h2 class="georgia-pro" style="margin: 40px 0px 20px 0px; font-size: 27px">
+    Add New Book
+  </h2>
+  <form action="/add-book" method="post" onsubmit="return validateForm()">
+    <div
+      class="book-card"
+      style="
+        background-color: transparent;
+        margin-top: 80px;
+        padding: 20px 20px 20px 0px;
+      "
+    >
+      <div class="book-info georgia-pro">
+        <div class="book-cover">
+          <img
+            class="cover-image"
+            style="height: 180px"
+            src="/assets/icons/book.svg"
+            alt="book image"
+          />
+        </div>
+        <div class="grid">
+          <label for="isbn">ISBN:</label>
+          <input
+            type="number"
+            id="isbn"
+            name="isbn"
+            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            maxlength="13"
+            required
+          />
+          <label for="title">Title:</label>
+          <input id="title" name="title" required />
+          <label for="author">Author:</label>
+          <input id="author" name="author" required />
+          <label for="read_date">Read Date:</label>
+          <input type="date" id="read_date" name="read_date" required />
+          <label>Rating:</label>
+          <div class="user-rating">
+            <input type="radio" id="star5" name="rating" value="5" />
+            <label for="star5" title="5 stars">★</label>
+
+            <input type="radio" id="star4" name="rating" value="4" />
+            <label for="star4" title="4 stars">★</label>
+
+            <input type="radio" id="star3" name="rating" value="3" />
+            <label for="star3" title="3 stars">★</label>
+
+            <input type="radio" id="star2" name="rating" value="2" />
+            <label for="star2" title="2 stars">★</label>
+
+            <input type="radio" id="star1" name="rating" value="1" />
+            <label for="star1" title="1 star">★</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary">
+      <label for="review" class="review-and-notes georgia-pro">Review:</label>
+      <textarea id="review" name="review" class="lato" required></textarea>
+    </div>
+
+    <div class="notes">
+      <label for="notes" class="review-and-notes georgia-pro">Notes:</label>
+      <textarea
+        class="lato notes-textarea"
+        id="notes"
+        name="notes"
+        required
+      ></textarea>
+    </div>
+    <div
+      class="actions"
+      style="margin-top: 30px; justify-content: space-between"
+    >
+      <input type="submit" class="add-button" />
+      <a href="/">
+        <button type="button" class="cancel-button georgia-pro">Cancel</button>
+      </a>
+    </div>
+  </form>
+</section>
+<script>
+  function validateForm() {
+    const radios = document.getElementsByName("rating");
+    let isChecked = false;
+
+    for (let i = 0; i < radios.length; i++) {
+      if (radios[i].checked) {
+        isChecked = true;
+        break;
+      }
+    }
+
+    if (!isChecked) {
+      alert("Please select a rating before submitting.");
+      return false;
+    }
+
+    return true;
+  }
+</script>
+
+<%- include("partials/footer.ejs") %>
