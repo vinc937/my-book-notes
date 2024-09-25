@@ -3,11 +3,14 @@ import express from "express";
 import bodyParser from "body-parser";
 import axios from "axios";
 import pg from "pg";
+import env from "dotenv";
 
-// initializing the express application and setting the port and external API URL
+
+// initializing the express application and setting the port, external API URL and env
 const app = express();
 const port = 3000;
 const apiUrl = "https://covers.openlibrary.org/b/isbn/";
+env.config();
 
 // setting the middleware: bodyParser to handle form submissions, and express.static to server static files
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -15,15 +18,24 @@ app.use(express.static("public"));
 
 // establishing connection to PostgreSQL database
 const db = new pg.Client({
-    user: "postgres",
-    host: "localhost",
-    database: "your_database",
-    password: "your_password",
-    port: 5432
+    user: process.env.PG_USER,
+    host: process.env.PG_HOST,
+    database: process.env.PG_DATABASE,
+    password: process.env.PG_PASSWORD,
+    port: process.env.PG_PORT,
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 
 // connecting to database
-db.connect();
+db.connect( err => {
+    if (err) {
+        console.error("Connection error", err.stack);
+    } else {
+        console.log("Connected to PostgreSQL");
+    }
+});
 
 // defining reusable functions
 async function fetchBookCover(isbn) {
@@ -99,7 +111,7 @@ app.get("/order-by/:option", async (req,res) => {
     const option = req.params.option;
     const validOptions = ['title', 'read_date', 'rating'];
     if (!validOptions.includes(option)) {
-        return res.status(400).json({error: 'Invalid sorting option'});
+        return res.status(400).send("<h1>Invalid sorting option</h1>");
     }
     let data = await orderBy(option);
     if (data.length == 0) {
@@ -147,7 +159,7 @@ app.post("/update/:id", async (req,res) => {
         res.redirect("/");
     } catch (err) {
         console.log(err.message);
-        res.status(500).json({error: "An error occurred while trying to update the book. Please try again."});
+        res.status(500).send("<h1>An error occurred while trying to update the book. Please try again.</h1>");
     }
 });
 
@@ -165,7 +177,7 @@ app.post("/add-book", async (req,res) => {
         res.redirect("/");
     } catch(err){
         console.log(err.message);
-        res.status(500).json({error: "There was an error adding the book, please try again."});
+        res.status(500).send("<h1>There was an error adding the book, please try again.</h1>");
     } 
 });
 
